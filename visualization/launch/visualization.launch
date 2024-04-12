@@ -1,0 +1,18 @@
+<launch>
+    <!-- 启动自定义路径发布节点 -->
+    <node name="visualization" pkg="visualization" type="visualization" output="screen" />
+
+    <!-- <param name="robot_description" textfile="$(find hunter2_base)/urdf/hunter2_base.urdf" /> -->
+    <param name="robot_description" textfile="$(find visualization)/urdf/hunter_with_velodyne.urdf.xacro" />
+    <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find hunter2_base)/urdf/hunter2_base_gazebo.xacro'" /> -->
+
+    <node
+    name="joint_state_publisher_gui"
+    pkg="joint_state_publisher_gui"
+    type="joint_state_publisher_gui" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- 在rviz中显示路径 -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find visualization)/rviz/visualization.rviz" required="true" />
+</launch>
